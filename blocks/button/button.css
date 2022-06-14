@@ -1,0 +1,19 @@
+.button {
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+    transition: all 2s ease-in-out;
+    width: 50px;
+    height: 50px;
+}
+
+.button:hover path:nth-of-type(2) {
+    filter: invert()
+}
+
+.button:hover {
+    background-color: #242424;
+}
+.button:disabled {
+    opacity: .5;
+}

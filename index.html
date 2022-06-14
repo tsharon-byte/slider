@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link href="pages/index.css" rel="stylesheet"/>
+    </head>
+    <body class="root">
+        <div class="page">
+            <main>
+                <section class="reviews">
+                    <div class="row">
+                        <h2 class="header">Рецензии</h2>
+                        <button class="button" id="left" disabled>
+                            <svg width="51" height="50" viewBox="0 0 51 50" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M25 49C11.7452 49 0.999997 38.2548 0.999998 25C0.999999 11.7452 11.7452 1 25 1"
+                                      stroke="#242424"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M15 25.5234L15.7248 24.7986L21.5234 19L22.2263 19.7029L16.9056 25.0235L36 25.0235L36 26.0235L16.9498 26.0235L22.2014 31.2752L21.4766 32L15.7029 26.2263L15 25.5234Z"
+                                      fill="#242424"/>
+                            </svg>
+                        </button>
+                        <button class="button" id="right">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M25 0.999997C38.2548 0.999999 49 11.7452 49 25C49 38.2548 38.2548 49 25 49"
+                                      stroke="#242424"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M35 24.4766L34.2752 25.2014L28.4766 31L27.7737 30.2971L33.0944 24.9765L14 24.9765L14 23.9765L33.0502 23.9765L27.7986 18.7248L28.5234 18L34.2971 23.7737L35 24.4766Z"
+                                      fill="#242424"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="review-row">
+                        <div class="review" id="review-1" style="left:25%"></div>
+                        <div class="review review_type_inactive" id="review-2"></div>
+                        <div class="review review_type_inactive" id="review-3"></div>
+                        <div class="review review_type_inactive" id="review-4"></div>
+                    </div>
+                    <nav>
+                        <div class="dots">
+                            <div class="dot dot_active" id="dot-1"></div>
+                            <div class="dot" id="dot-2"></div>
+                            <div class="dot" id="dot-3"></div>
+                            <div class="dot" id="dot-4"></div>
+                        </div>
+                    </nav>
+                </section>
+            </main>
+        </div>
+        <script src="./scripts/index.js"></script>
+    </body>
+</html>

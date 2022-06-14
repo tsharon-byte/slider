@@ -1,0 +1,11 @@
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: red 2px solid;
+    background-color: inherit;
+}
+
+.dot:hover {
+    transform: scale(1.5);
+}

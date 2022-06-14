@@ -1,0 +1,6 @@
+.dots {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}

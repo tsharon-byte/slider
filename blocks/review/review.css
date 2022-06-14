@@ -1,0 +1,12 @@
+.review {
+    background-color: white;
+    width: 50%;
+    height: 600px;
+    border: 1px solid green;
+    overflow: hidden;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 1s ease-in-out;
+}

@@ -1,0 +1,7 @@
+.review-row {
+    display: flex;
+    gap: 30px;
+    position: relative;
+    height: 600px;
+    width: 100%;
+}
