@@ -33,22 +33,21 @@
                         </button>
                     </div>
                     <div class="review-row">
-                        <div class="review" id="review-1" style="left:25%"></div>
-                        <div class="review review_type_inactive" id="review-2"></div>
-                        <div class="review review_type_inactive" id="review-3"></div>
-                        <div class="review review_type_inactive" id="review-4"></div>
+                        <template id="reviewTemplate">
+                            <div class="review" id="review-1"></div>
+                        </template>
                     </div>
                     <nav>
                         <div class="dots">
-                            <div class="dot dot_active" id="dot-1"></div>
-                            <div class="dot" id="dot-2"></div>
-                            <div class="dot" id="dot-3"></div>
-                            <div class="dot" id="dot-4"></div>
+                            <template id="dotTemplate">
+                                <div class="dot"></div>
+                            </template>
                         </div>
                     </nav>
                 </section>
             </main>
         </div>
+        <script src="./scripts/data.js"></script>
         <script src="./scripts/index.js"></script>
     </body>
 </html>

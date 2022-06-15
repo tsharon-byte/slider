@@ -1,7 +1,9 @@
 .review-row {
     display: flex;
-    gap: 30px;
-    position: relative;
+    gap: 50px;
     height: 600px;
-    width: 100%;
+    top: 150px;
+    margin-left: 150%;
+    box-sizing: border-box;
+    transition: all 1s ease-in-out;
 }

@@ -1,84 +1,81 @@
+//Get html elements
 const dots = document.querySelector('.dots');
-let current = document.querySelector(' #dot-1');
+const dotTemplate = document.querySelector('#dotTemplate').content;
+const dotElement = dotTemplate.querySelector('.dot');
+
+const reviewRow = document.querySelector('.review-row');
+const reviewTemplate = document.querySelector('#reviewTemplate').content;
+const reviewElement = reviewTemplate.querySelector('.review');
+
 const left = document.querySelector(' #left');
 const right = document.querySelector(' #right');
-const reviews = [{
-    id: 1,
-    URL: 'https://images.unsplash.com/photo-1432457990754-c8b5f21448de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80'
-}, {
-    id: 2,
-    URL: 'https://images.unsplash.com/photo-1609639643505-3c158a56de42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=812&q=80'
-}, {
-    id: 3,
-    URL: 'https://images.unsplash.com/photo-1575574202425-ba42a224118b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-}, {
-    id: 4,
-    URL: 'https://images.unsplash.com/photo-1565799690086-be5ba70ea648?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80'
-}];
-const reviewObjects = Array.from(document.querySelectorAll('.review'));
-for (let i = 0; i < reviews.length; i++) {
-    reviewObjects[i].style.backgroundImage = `url(${reviews[i].URL})`;
-    reviewObjects[i].style.left = `${i * 55 + 25}%`;
-}
 
-function update(newId, oldId) {
-    reviewObjects.forEach(item => {
-        const newLeft = +item.style.left.split('%')[0] + 55 * (oldId - newId);
-        item.style.left = `${newLeft}%`;
+//functions
+function prepareDots(config) {
+    config.forEach((item) => {
+        const dot = dotElement.cloneNode(true);
+        dot.id = `dot-${item.id}`;
+        dots.appendChild(dot);
     })
-    reviewObjects[newId - 1].classList.toggle('review_type_inactive');
-    reviewObjects[oldId - 1].classList.toggle('review_type_inactive');
 }
 
-dots.addEventListener('click', (event) => {
-    if (event.target.classList.contains('dot')) {
-        current.classList.toggle('dot_active');
-        const newId = +event.target.id.split('-')[1];
-        const oldId = +current.id.split('-')[1];
-        update(newId, oldId);
-        current = event.target;
-        current.classList.toggle('dot_active');
-        if (newId > 1) {
-            left.removeAttribute('disabled');
-        } else {
-            left.setAttribute('disabled', 'disabled');
-        }
-        if (newId < 4) {
-            right.removeAttribute('disabled');
-        } else {
+function prepareReview(config) {
+    config.forEach((item) => {
+        const review = reviewElement.cloneNode(true);
+        review.id = `review-${item.id}`;
+        review.style.backgroundImage = `url(${item.URL})`;
+        reviewRow.appendChild(review);
+    });
+}
+
+function update(positionId, dotArray, reviewArray) {
+    if (positionId > 0 && positionId <= config.length) {
+        dotArray.forEach(item => {
+            if (+item.id.split('-')[1] === positionId) {
+                item.classList.add('dot_active');
+            } else {
+                item.classList.remove('dot_active');
+            }
+        });
+        reviewArray.forEach(item => {
+            if (+item.id.split('-')[1] === positionId) {
+                item.classList.remove('review_type_inactive');
+            } else {
+                item.classList.add('review_type_inactive');
+            }
+        });
+        if (sliderPosition === 4) {
             right.setAttribute('disabled', 'disabled');
+            left.removeAttribute('disabled');
+        } else if (sliderPosition === 1){
+            left.setAttribute('disabled', 'disabled');
+            right.removeAttribute('disabled');
+        }else{
+            left.removeAttribute('disabled');
+            right.removeAttribute('disabled');
         }
+        reviewRow.style.marginLeft = `${150 - 100 * (sliderPosition - 1)}%`;
+    }
+}
+
+//initialSetup
+prepareDots(config);
+prepareReview(config);
+let sliderPosition = config[0].id;
+const dotArray = Array.from(dots.querySelectorAll('.dot'));
+const reviewArray = Array.from(reviewRow.querySelectorAll('.review'));
+update(sliderPosition, dotArray, reviewArray);
+dots.addEventListener('click', event => {
+    if (event.target.classList.contains('dot')) {
+        sliderPosition = +event.target.id.split('-')[1];
+        update(sliderPosition, dotArray, reviewArray);
     }
 });
 left.addEventListener('click', event => {
-    let currentId = +current.id.split('-')[1];
-    if (currentId > 1) {
-        const oldId = currentId;
-        currentId--;
-        const newId = currentId;
-        right.removeAttribute('disabled');
-        current.classList.toggle('dot_active');
-        current = document.getElementById(`dot-${currentId}`)
-        current.classList.toggle('dot_active');
-        update(newId, oldId);
-        if (currentId === 1) {
-            left.setAttribute('disabled', 'disabled');
-        }
-    }
+    sliderPosition--;
+    update(sliderPosition, dotArray, reviewArray);
 })
 right.addEventListener('click', event => {
-    let currentId = +current.id.split('-')[1];
-    if (currentId < 4) {
-        const oldId = currentId;
-        currentId++;
-        const newId = currentId;
-        left.removeAttribute('disabled');
-        current.classList.toggle('dot_active');
-        current = document.getElementById(`dot-${currentId}`)
-        current.classList.toggle('dot_active');
-        update(newId, oldId);
-        if (currentId === 4) {
-            right.setAttribute('disabled', 'disabled');
-        }
-    }
+    sliderPosition++;
+    update(sliderPosition, dotArray, reviewArray);
 })
